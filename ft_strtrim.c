@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:57:21 by emsoares          #+#    #+#             */
-/*   Updated: 2022/11/16 17:42:23 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:19:43 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@ beginning and the end of a string. In other words,
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *str, char const *set)
 {
-	size_t	i;
 	char	*result;
+	int		start;
+	int		end;
 
-	if (s1 == NULL || set == NULL)
-		return (NULL);
-	while (*s1 != '\0' && ft_strchr(set, *s1))
-	s1++;
-	i = ft_strlen(s1) - 1;
-	while (i && ft_strchr(set, s1[i]))
-		i--;
-	result = ft_substr(s1, 0, i + 1);
+	start = 0;
+	if (!str)
+		return (0);
+	end = ft_strlen((char *)str);
+	while (str[start] && ft_strchr((char *)set, str[start]))
+		start++;
+	while (end > start && ft_strchr((char *)set, str[end - 1]))
+		end--;
+	result = ft_substr(str, start, (end - start));
 	return (result);
 }
 
